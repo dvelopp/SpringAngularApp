@@ -10,14 +10,14 @@
 
 Application allows you to navigate accross the pages that you have access to.  *User management* module provides functionallity to create and modify existing users. These users are used to login to the system. 
 
-The application has following traits:
+The application has the following traits:
 
  - **Single page structure**;
  - **Spring security secures access to resources** *(The server side won't get you data which you don't have access to. While angular will hide every element on the UI which should not be accessable by the user)* ;
  - **Spring MVC based RESTful web services** provides JSON answers on HTTP methods GET/POST/PUT/DELETE;
  - **ORM** based domain model;
  - **Good test coverage** *(Spring mvc tests, unit tests, integration tests)* ;
- - **Data validation**(Spring validators + angular directives);
+ - **Server side validation**(Spring validators + angular directives);
  - **Static web pages** *(Only static **HTML**, no JSP and other dynamic pages)* ;
  - **Annotation based Spring and Hibernate configuration**;
  - **Integration tests** with in-memory database H2;

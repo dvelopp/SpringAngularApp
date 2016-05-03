@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Angular APP</title>
+
+    <!-- Angular dependencies -->
+    <script src="/resources/bower_components/angular/angular.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/ngstorage/ngStorage.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-route/angular-route.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-cookies/angular-cookies.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-resource/angular-resource.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-translate/angular-translate.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-translate-loader-url/angular-translate-loader-url.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js" type="application/javascript"></script>
+
+    <!-- Bootstrap dependencies -->
+    <script src="/resources/bower_components/angular-bootstrap/ui-bootstrap.min.js" type="application/javascript"></script>
+    <script src="/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
+    <!-- Custom scripts -->
+    <script src="/resources/scripts/app.js" type="application/javascript"></script>
+    <script src="/resources/scripts/routes.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/system/languageController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/system/navigationController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/system/loginPageController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/user/userController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/homeController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/user/userController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/user/userDeleteController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/user/userEditController.js" type="application/javascript"></script>
+    <script src="/resources/scripts/controllers/configurationController.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/resources/styles/main.css">
+
+    <script src="/resources/bower_components/jquery/dist/jquery.min.js" type="application/javascript"></script>
+
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+
+<body ng-app="myApp" ng-cloak class="ng-cloak">
+        <div ng-controller="NavigationController as nav" class="container">
+            <ul class="nav nav-pills navbar-inverse" role="tablist">
+                <li ng-show="$storage.authenticated && model.hasConfigurationViewAccess" ng-class="{active:nav.tab('configuration')}">
+                    <a href="#/configuration"><span class="glyphicon glyphicon-star"></span> <span translate>system.navigation.configuration</span></a>
+                </li>
+                <li ng-class="{active:nav.tab('home')}">
+                    <a href="#/"><span class="glyphicon glyphicon-home"></span> <span translate>system.navigation.home</span></a>
+                </li>
+                <li ng-show="!$storage.authenticated" ng-class="{active:nav.tab('navigation')}">
+                    <a href="#/login"><span class="glyphicon glyphicon-log-in"></span> <span translate>system.navigation.login</span></a>
+                </li>
+                <li ng-show="$storage.authenticated">
+                    <a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> <span translate>system.navigation.logout</span></a>
+                </li>
+            </ul>
+        </div>
+        <div ng-view class="container"></div>
+
+        <div class="footer panel panel-default">
+            <div class="panel-body">
+                <i>© 2016 DVELOPP ALL RIGHTS RESERVED</i>
+                <div ng-controller="LanguageController">
+                    <span><a href="" ng-click="changeLanguage('en')">
+                        <img src="/resources/images/languages/en.png"></a>
+                    </span>
+                    <span><a href="" ng-click="changeLanguage('ru')">
+                        <img src="/resources/images/languages/ru.png"></a>
+                    </span>
+                    <span><a href="" ng-click="changeLanguage('ua')">
+                        <img src="/resources/images/languages/ua.png"></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

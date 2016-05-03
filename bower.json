@@ -1,0 +1,18 @@
+{
+  "name": "SpringAngularApp",
+  "homepage": "https://github.com/dvelopp/spring-4-test",
+  "authors": [
+    "dvelopp <dvelopp@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

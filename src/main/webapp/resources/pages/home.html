@@ -1,0 +1,15 @@
+<div class="page-header">
+    <h1 translate>system.pages.headers.home</h1>
+</div>
+<div style="text-align: center">
+    <b ng-show="$storage.principal">
+        <img src="/resources/images/welcome.jpg"/>
+        <h1>
+            {{$storage.principal.principal.firstName}}
+            {{$storage.principal.principal.lastName}}
+        </h1>
+    </b>
+    <b ng-show="!$storage.principal" translate>
+        system.home.unauthorized
+    </b>
+</div>

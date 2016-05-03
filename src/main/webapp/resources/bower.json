@@ -1,0 +1,31 @@
+{
+  "name": "Spring Angular APP",
+  "homepage": "https://github.com/dvelopp/spring-4-test",
+  "authors": [
+    "dvelopp <dvelopp@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "angular-ui-bootstrap-bower#0.13.4",
+    "angular-resource": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "angular-translate": "^2.11.0",
+    "angular-translate-storage-cookie": "^2.11.0",
+    "angular-translate-loader-url": "^2.11.0",
+    "ngstorage": "^0.3.10",
+    "jquery-ui": "^1.11.4",
+    "bootstrap": "^3.3.6",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "ui-router": "https://github.com/angular-ui/ui-router"
+  }
+}

@@ -22,7 +22,7 @@ public class User extends Identifiable {
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private Boolean systemUser;
+    private Boolean systemUser = false;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "user_user_user_group"), nullable = false)

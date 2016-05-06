@@ -3,8 +3,8 @@ package springAngularApp.users.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import springAngularApp.users.domain.entities.UserGroup;
 import springAngularApp.system.domain.model.IdNameCommand;
+import springAngularApp.users.domain.entities.UserGroup;
 import springAngularApp.users.domain.repositories.UserGroupRepository;
 
 import java.util.List;
@@ -20,8 +20,12 @@ public class UserGroupService {
     @Transactional(readOnly = true)
     public List<IdNameCommand> getUserGroups() {
         return newArrayList(userGroupRepository.findAll()).stream()
-                .map(userGroup -> new IdNameCommand(userGroup, UserGroup::getId, UserGroup::getName))
+                .map(this::mapUserGroupToIdNameCommand)
                 .collect(toList());
+    }
+
+    private IdNameCommand mapUserGroupToIdNameCommand(UserGroup userGroup) {
+        return new IdNameCommand(userGroup, UserGroup::getId, UserGroup::getName);
     }
 
 }

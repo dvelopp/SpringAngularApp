@@ -15,6 +15,9 @@ import springAngularApp.users.domain.repositories.UserRepository;
 import static org.springframework.http.HttpStatus.OK;
 import static springAngularApp.users.domain.entities.UserAuthorities.*;
 
+/**
+ * TODO Delete me
+ */
 @RestController
 public class InitDBController {
 

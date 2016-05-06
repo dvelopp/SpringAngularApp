@@ -2,11 +2,17 @@ package springAngularApp.system.ws;
 
 import org.springframework.validation.Errors;
 
-public class ValidationErrorsException extends RuntimeException {
+import static org.springframework.util.Assert.notNull;
+
+public final class ValidationErrorsException extends RuntimeException {
 
     private Errors errors;
 
+    private ValidationErrorsException() {
+    }
+
     public ValidationErrorsException(Errors errors) {
+        notNull(errors);
         this.errors = errors;
     }
 

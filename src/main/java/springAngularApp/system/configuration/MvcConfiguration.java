@@ -49,9 +49,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public SerializableResourceBundleMessageSource serializableResourceBundleMessageSource(){
-        SerializableResourceBundleMessageSource serializableResourceBundleMessageSource = new SerializableResourceBundleMessageSource();
-        serializableResourceBundleMessageSource.setBasename("classpath:/messages");
-        return serializableResourceBundleMessageSource;
+        return new SerializableResourceBundleMessageSource();
     }
 
     @Override

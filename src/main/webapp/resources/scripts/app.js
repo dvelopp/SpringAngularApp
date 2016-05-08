@@ -7,7 +7,8 @@ var app = angular.module('myApp',
         'ngCookies',
         'ui.router',
         'ngRoute',
-        'ngStorage'
+        'ngStorage',
+        'angularjs-dropdown-multiselect'
     ]
 );
 

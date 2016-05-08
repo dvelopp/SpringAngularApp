@@ -3,6 +3,5 @@
 </div>
 <ul class="nav nav-pills nav-stacked">
     <li role="presentation" ng-show="model.hasUserViewAccess"><a href="#/users" translate>system.pages.configuration.menu.users</a></li>
-    <li role="presentation" class="disabled"><a href="#" translate>system.pages.configuration.menu.authorities</a></li>
-    <li role="presentation" class="disabled"><a href="#" translate>system.pages.configuration.menu.groups</a></li>
+    <li role="presentation" ng-show="model.hasUserViewAccess"><a href="#/userGroups" translate>system.pages.configuration.menu.groups</a></li>
 </ul>

@@ -29,7 +29,7 @@ public class HomeWebServiceTest {
 
     @Test
     public void attributes_StatusIsOk() throws Exception {
-        mockMvc.perform(get("/ws/home/attributes")
+        mockMvc.perform(get("/ws/home/model")
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

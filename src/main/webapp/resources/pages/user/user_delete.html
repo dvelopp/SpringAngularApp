@@ -1,10 +1,10 @@
 <form id="userEditForm" name="userEditForm" ng-submit="save()">
     <input type="hidden" name="id" ng-model="editedUser.id">
     <div class="modal-body">
-        Are you sure that you want to delete user {{userToDelete.userName}} ?
+        <span translate>user.delete.confirm</span> {{userToDelete.userName}} ?
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="delete ()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="delete()" translate>system.buttons.ok</button>
+        <button class="btn btn-warning" ng-click="cancel()" translate>system.buttons.cancel</button>
     </div>
 </form>

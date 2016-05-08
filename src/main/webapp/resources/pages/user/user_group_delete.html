@@ -1,0 +1,10 @@
+<form id="userEditForm" name="userEditForm" ng-submit="save()">
+    <input type="hidden" name="id" ng-model="editedUser.id">
+    <div class="modal-body">
+        <span translate>user.group.delete.confirm</span> {{group.name}} ?
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="delete()" translate>system.buttons.ok</button>
+        <button class="btn btn-warning" ng-click="cancel()" translate>system.buttons.cancel</button>
+    </div>
+</form>

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import springAngularApp.users.domain.entities.User;
 import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.domain.repositories.UserRepository;
+import springAngularApp.users.service.mapper.UserCommandMapper;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package springAngularApp.users.ws;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,13 +8,15 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import springAngularApp.users.domain.entities.UserGroup;
 import springAngularApp.system.domain.model.IdNameCommand;
-import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.system.service.AuthProvider;
+import springAngularApp.system.utils.JsonUtils;
+import springAngularApp.users.domain.entities.UserGroup;
+import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.service.UserGroupService;
 import springAngularApp.users.service.UserService;
-import springAngularApp.users.ws.schema.UserListResponse;
+import springAngularApp.users.ws.schema.UserConfigurationModelResponse;
+import springAngularApp.users.ws.validation.UserValidator;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -27,11 +28,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static springAngularApp.system.utils.JsonUtils.fromJSON;
 import static springAngularApp.users.domain.entities.UserAuthorities.ROLE_USER_DELETE;
 import static springAngularApp.users.domain.entities.UserAuthorities.ROLE_USER_EDIT;
 import static springAngularApp.users.domain.entities.UserGroupFixture.createDefaultUserGroup;
 import static springAngularApp.users.domain.model.UserCommandFixture.createDefaultUserCommand;
-import static springAngularApp.users.ws.UserWebService.COMMAND_NAME;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserWebServiceTest {
@@ -43,7 +44,6 @@ public class UserWebServiceTest {
     @Mock private UserService userService;
 
     private MockMvc mockMvc;
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
     public void setup() {
@@ -52,85 +52,85 @@ public class UserWebServiceTest {
     }
 
     @Test
-    public void attributes_HasDeleteUserAccess_DeleteAccessIsTrueInResponse() throws Exception {
+    public void model_HasDeleteUserAccess_DeleteAccessIsTrueInResponse() throws Exception {
         when(authProvider.hasRole(ROLE_USER_DELETE)).thenReturn(true);
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.isHasUserDeleteAccess()).isTrue();
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.isHasUserDeleteAccess()).isTrue();
     }
 
     @Test
-    public void attributes_HasNoDeleteUserAccess_DeleteAccessIsFalseInResponse() throws Exception {
+    public void model_HasNoDeleteUserAccess_DeleteAccessIsFalseInResponse() throws Exception {
         when(authProvider.hasRole(ROLE_USER_DELETE)).thenReturn(false);
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.isHasUserDeleteAccess()).isFalse();
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.isHasUserDeleteAccess()).isFalse();
     }
 
     @Test
-    public void attributes_HasEditUserAccess_EditAccessIsTrueInResponse() throws Exception {
+    public void model_HasEditUserAccess_EditAccessIsTrueInResponse() throws Exception {
         when(authProvider.hasRole(ROLE_USER_EDIT)).thenReturn(true);
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.isHasUserEditAccess()).isTrue();
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.isHasUserEditAccess()).isTrue();
     }
 
     @Test
-    public void attributes_HasNoEditUserAccess_EditAccessIsFalseInResponse() throws Exception {
+    public void model_HasNoEditUserAccess_EditAccessIsFalseInResponse() throws Exception {
         when(authProvider.hasRole(ROLE_USER_EDIT)).thenReturn(false);
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.isHasUserEditAccess()).isFalse();
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.isHasUserEditAccess()).isFalse();
     }
 
     @Test
-    public void attributes_HasUserGroups_UserGroupsHaveBeenAdded() throws Exception {
+    public void model_HasUserGroups_UserGroupsHaveBeenAdded() throws Exception {
         IdNameCommand command = new IdNameCommand(createDefaultUserGroup(), UserGroup::getId, UserGroup::getName);
-        when(userGroupService.getUserGroups()).thenReturn(asList(command));
+        when(userGroupService.getUserGroupLinks()).thenReturn(asList(command));
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.getUserGroups()).containsOnly(command);
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.getUserGroups()).containsOnly(command);
     }
 
     @Test
-    public void attributes_HasNoUserGroups_UserGroupsHaveNotBeenAdded() throws Exception {
-        when(userGroupService.getUserGroups()).thenReturn(emptyList());
+    public void model_HasNoUserGroups_UserGroupsHaveNotBeenAdded() throws Exception {
+        when(userGroupService.getUserGroupLinks()).thenReturn(emptyList());
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.getUserGroups()).isEmpty();
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.getUserGroups()).isEmpty();
     }
 
     @Test
-    public void attributes_HasUsers_UsersHaveBeenAdded() throws Exception {
+    public void model_HasUsers_UsersHaveBeenAdded() throws Exception {
         UserCommand command = createDefaultUserCommand();
         when(userService.getUsers()).thenReturn(asList(command));
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.getUsers()).containsOnly(command);
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.getUsers()).containsOnly(command);
     }
 
     @Test
-    public void attributes_HasNoUsers_UsersHaveNotBeenAdded() throws Exception {
+    public void model_HasNoUsers_UsersHaveNotBeenAdded() throws Exception {
         when(userService.getUsers()).thenReturn(emptyList());
 
-        MockHttpServletResponse response = sendValidRequestForAttributes();
+        MockHttpServletResponse response = requestModel();
 
-        UserListResponse actualUserListResponse = getUserListResponse(response);
-        assertThat(actualUserListResponse.getUsers()).isEmpty();
+        UserConfigurationModelResponse actualUserConfigurationModelResponse = getUserListResponse(response);
+        assertThat(actualUserConfigurationModelResponse.getUsers()).isEmpty();
     }
 
     @Test
@@ -148,8 +148,9 @@ public class UserWebServiceTest {
     @Test
     public void save_UserHasBeenSaved() throws Exception {
         UserCommand user = createDefaultUserCommand();
-
-        mockMvc.perform(post("/ws/users").flashAttr(COMMAND_NAME, user)
+        String userJson = JsonUtils.toJSON(user);
+        mockMvc.perform(post("/ws/users")
+                .content(userJson)
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
@@ -157,12 +158,12 @@ public class UserWebServiceTest {
         verify(userService).save(user);
     }
 
-    private UserListResponse getUserListResponse(MockHttpServletResponse response) throws java.io.IOException {
-        return objectMapper.readValue(response.getContentAsString(), UserListResponse.class);
+    private UserConfigurationModelResponse getUserListResponse(MockHttpServletResponse response) throws java.io.IOException {
+        return fromJSON(UserConfigurationModelResponse.class, response.getContentAsString());
     }
 
-    private MockHttpServletResponse sendValidRequestForAttributes() throws Exception {
-        return mockMvc.perform(get("/ws/users")
+    private MockHttpServletResponse requestModel() throws Exception {
+        return mockMvc.perform(get("/ws/users/model")
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();

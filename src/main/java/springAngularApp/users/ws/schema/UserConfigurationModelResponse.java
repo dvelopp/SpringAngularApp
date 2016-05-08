@@ -6,7 +6,7 @@ import springAngularApp.system.domain.model.IdNameCommand;
 
 import java.util.List;
 
-public class UserListResponse {
+public class UserConfigurationModelResponse {
 
     private List<UserCommand> users;
     private List<IdNameCommand> userGroups;

@@ -8,11 +8,11 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping("ws/home/attributes")
+@RequestMapping("ws/home")
 public class HomeWebService {
 
-    @RequestMapping(method = GET)
-    public ResponseEntity attributes() {
+    @RequestMapping(method = GET, value = "/model")
+    public ResponseEntity model() {
         return new ResponseEntity(OK);
     }
 

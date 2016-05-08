@@ -1,6 +1,6 @@
 package springAngularApp.navigation.ws.schema;
 
-public class NavigationResponse {
+public class NavigationModelResponse {
 
     private boolean hasConfigurationViewAccess;
 

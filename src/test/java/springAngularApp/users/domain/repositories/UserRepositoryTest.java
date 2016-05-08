@@ -19,7 +19,7 @@ public class UserRepositoryTest extends HibernateIntegrationTest<User> {
         User secondUser = createUserWithFirstName("B");
         saveAll(firstUser, secondUser).flush();
 
-        Iterable<User> actualUsers = userRepository.findAll();
+        Iterable<User> actualUsers = userRepository.findByOrderByFirstNameAsc();
 
         assertThat(actualUsers).hasSize(2);
     }

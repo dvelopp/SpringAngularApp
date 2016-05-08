@@ -4,8 +4,6 @@ controllers.controller("UserOverviewController", function ($rootScope, $scope, $
     $scope.validationErrors = {};
     $scope.editedUser;
 
-    $scope.showDeletionDialog = false;
-
     $scope.edit = function (user) {
         $scope.editedUserLink = user;
         $scope.validationErrors = {};
@@ -22,8 +20,8 @@ controllers.controller("UserOverviewController", function ($rootScope, $scope, $
         $scope.editDialog();
     };
 
-    $scope.loadUsers = function () {
-        $http.get("/ws/users").success(function (data) {
+    $scope.loadModel = function () {
+        $http.get("/ws/users/model").success(function (data) {
             $scope.model = data;
         })
     };
@@ -37,7 +35,7 @@ controllers.controller("UserOverviewController", function ($rootScope, $scope, $
                     return $scope.editedUser;
                 },
                 onSuccess: function () {
-                    return $scope.loadUsers;
+                    return $scope.loadModel;
                 }
             }
         });
@@ -52,13 +50,13 @@ controllers.controller("UserOverviewController", function ($rootScope, $scope, $
                     return user;
                 },
                 onSuccess: function () {
-                    return $scope.loadUsers;
+                    return $scope.loadModel;
                 }
             }
         });
     };
 
-    $scope.loadUsers();
+    $scope.loadModel();
 
 });
 

@@ -1,4 +1,4 @@
-package springAngularApp.users.service;
+package springAngularApp.users.service.mapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +14,7 @@ import springAngularApp.users.domain.repositories.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static springAngularApp.users.domain.entities.User.OLD_PASSWORD_MASK;
 import static springAngularApp.users.domain.entities.UserFixture.createDefaultUser;
 import static springAngularApp.users.domain.model.UserCommandFixture.createDefaultUserCommand;
@@ -26,6 +24,7 @@ import static springAngularApp.users.domain.model.UserCommandFixture.createUserC
 public class UserCommandMapperTest {
 
     @InjectMocks private UserCommandMapper testee;
+
     @Mock private UserGroupRepository userGroupRepository;
     @Mock private UserRepository userRepository;
     @Mock private PasswordEncoder passwordEncoder;

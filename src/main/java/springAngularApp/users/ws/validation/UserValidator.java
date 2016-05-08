@@ -1,17 +1,16 @@
-package springAngularApp.users.ws;
+package springAngularApp.users.ws.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import springAngularApp.system.ws.ValidationErrorsException;
 import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.domain.repositories.UserRepository;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static springAngularApp.users.domain.entities.User.MIN_PASSWORD_LENGTH;
 import static springAngularApp.users.domain.entities.User.OLD_PASSWORD_MASK;
-import static springAngularApp.users.ws.UserValidationConstants.*;
+import static springAngularApp.users.ws.validation.UserValidationConstants.*;
 
 @Component
 public class UserValidator implements Validator {
@@ -37,9 +36,6 @@ public class UserValidator implements Validator {
             errors.rejectValue(USER_GROUP_FIELD, USER_GROUP_IS_EMPTY_CODE);
         }
         validatePassword(errors, userCommand);
-        if (errors.hasErrors()) {
-            throw new ValidationErrorsException(errors);
-        }
     }
 
     private void validateUserName(Errors errors, UserCommand userCommand) {

@@ -3,12 +3,12 @@ package springAngularApp.system.domain.model;
 import java.util.Objects;
 import java.util.function.Function;
 
-public final class IdNameCommand {
+public class IdNameCommand {
 
     private String id;
     private String name;
 
-    private IdNameCommand() {
+    public IdNameCommand() {
     }
 
     public <T> IdNameCommand(T object, Function<T, String> idMapper, Function<T, String> nameMapper) {
@@ -22,6 +22,14 @@ public final class IdNameCommand {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

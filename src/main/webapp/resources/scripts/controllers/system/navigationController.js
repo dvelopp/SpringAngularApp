@@ -4,7 +4,7 @@ controllers.controller("NavigationController", ['$rootScope', '$scope', '$http',
     $scope.model = {};
 
     var reloadNavigation = function(){
-        $http.get("/ws/navigation/attributes").success(function(data) {
+        $http.get("/ws/navigation/model").success(function(data) {
             $scope.model = data;
         })
     };
@@ -19,11 +19,13 @@ controllers.controller("NavigationController", ['$rootScope', '$scope', '$http',
         $http.post('logout', {}).success(function () {
             $sessionStorage.authenticated = false;
             $sessionStorage.principal = undefined;
-            $location.path("/");
             $rootScope.$emit("reloadNavigation", {});
+            $location.path("/");
         }).error(function (data) {
             $sessionStorage.principal = undefined;
             $sessionStorage.authenticated = false;
+            $rootScope.$emit("reloadNavigation", {});
+            $location.path("/");
         });
     }
 

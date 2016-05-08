@@ -5,43 +5,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import springAngularApp.system.domain.HibernateIntegrationTest;
 import springAngularApp.users.domain.entities.UserAuthority;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static springAngularApp.users.domain.entities.UserAuthorityFixture.createDefaultUserAuthority;
+import static springAngularApp.users.domain.entities.UserAuthorityFixture.createUserAuthorityWithName;
 
 public class UserAuthorityRepositoryTest extends HibernateIntegrationTest<UserAuthority> {
 
     @Autowired private UserAuthorityRepository userAuthorityRepository;
 
     @Test
-    public void save_ValidEntity_EntityWasSaved() {
-        UserAuthority expectedUserAuthority = createDefaultUserAuthority();
+    public void findByOrderByNameAsc_TwoUserAuthorities_TwoUserAuthoritiesHaveBeenReturned(){
+        UserAuthority firstAuthority = createUserAuthorityWithName("A");
+        UserAuthority secondAuthority = createUserAuthorityWithName("B");
+        saveAll(firstAuthority, secondAuthority).flush();
 
-        userAuthorityRepository.save(expectedUserAuthority);
+        Iterable<UserAuthority> actualUserAuthorities = userAuthorityRepository.findByOrderByNameAsc();
 
-        UserAuthority actualUserAuthority = getById(expectedUserAuthority.getId());
-        assertThat(actualUserAuthority).isEqualTo(expectedUserAuthority);
+        assertThat(actualUserAuthorities).hasSize(2);
     }
 
     @Test
-    public void getById_ValidId_EntityHasBeenReturned(){
-        UserAuthority expectedUserAuthority = createDefaultUserAuthority();
-        save(expectedUserAuthority);
+    public void findByOrderByNameAsc_TwoUserAuthoritiesSavedInWrongOrder_UserAuthoritiesHaveBeenReturnedInTheCorrectOrder(){
+        UserAuthority firstAuthority = createUserAuthorityWithName("B");
+        UserAuthority secondAuthority = createUserAuthorityWithName("A");
+        saveAll(firstAuthority, secondAuthority).flush();
 
-        UserAuthority actualUserAuthority = userAuthorityRepository.findOne(expectedUserAuthority.getId());
+        Iterable<UserAuthority> actualUserAuthorities = userAuthorityRepository.findByOrderByNameAsc();
 
-        assertThat(actualUserAuthority).isEqualTo(expectedUserAuthority);
+        assertThat(actualUserAuthorities).containsExactly(secondAuthority, firstAuthority);
     }
 
     @Test
-    public void getById_InvalidId_EntityHasBeenReturned(){
-        UserAuthority expectedUserAuthority = createDefaultUserAuthority();
-        save(expectedUserAuthority);
+    public void findByOrderByNameAsc_TwoUserAuthoritiesSavedInCorrectOrder_UserAuthoritiesHaveBeenReturnedInTheCorrectOrder(){
+        UserAuthority firstAuthority = createUserAuthorityWithName("A");
+        UserAuthority secondAuthority = createUserAuthorityWithName("B");
+        saveAll(firstAuthority, secondAuthority).flush();
 
-        UserAuthority actualUserAuthority = userAuthorityRepository.findOne(UUID.randomUUID().toString());
+        Iterable<UserAuthority> actualUserAuthorities = userAuthorityRepository.findByOrderByNameAsc();
 
-        assertThat(actualUserAuthority).isNull();
+        assertThat(actualUserAuthorities).containsExactly(firstAuthority, secondAuthority);
     }
 
     @Override

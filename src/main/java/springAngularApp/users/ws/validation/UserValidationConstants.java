@@ -1,5 +1,10 @@
-package springAngularApp.users.ws;
+package springAngularApp.users.ws.validation;
 
+import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public final class UserValidationConstants {
 
     //Fields
@@ -17,8 +22,5 @@ public final class UserValidationConstants {
     public static final String PASSWORD_IS_EMPTY_CODE = "user.validation.empty-password";
     public static final String USER_NAME_EXISTS_CODE = "user.validation.user-exists";
     public static final String PASSWORD_IS_WEAK_CODE = "user.validation.weak-password";
-
-    private UserValidationConstants() {
-    }
 
 }

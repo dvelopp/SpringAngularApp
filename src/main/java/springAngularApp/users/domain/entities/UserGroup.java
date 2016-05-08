@@ -14,6 +14,9 @@ public class UserGroup extends Identifiable {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean superUserGroup = false;
+
     @ManyToMany
     @JoinTable(
             name = "userGroup_userAuthority",
@@ -45,6 +48,14 @@ public class UserGroup extends Identifiable {
 
     public void setAuthorities(List<UserAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isSuperUserGroup() {
+        return superUserGroup;
+    }
+
+    public void setSuperUserGroup(boolean superUserGroup) {
+        this.superUserGroup = superUserGroup;
     }
 
     public UserGroup(String name, List<UserAuthority> authorities) {

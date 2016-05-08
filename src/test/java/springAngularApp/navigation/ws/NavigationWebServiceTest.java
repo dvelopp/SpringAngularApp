@@ -1,6 +1,5 @@
 package springAngularApp.navigation.ws;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import springAngularApp.navigation.ws.schema.NavigationResponse;
+import springAngularApp.navigation.ws.schema.NavigationModelResponse;
 import springAngularApp.system.service.AuthProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,6 +17,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static springAngularApp.system.utils.JsonUtils.fromJSON;
 import static springAngularApp.users.domain.entities.UserAuthorities.ROLE_CONFIGURATION_VIEW;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,7 +27,6 @@ public class NavigationWebServiceTest {
     @Mock private AuthProvider authProvider;
 
     private MockMvc mockMvc;
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
     public void setup() {
@@ -40,8 +39,8 @@ public class NavigationWebServiceTest {
 
         MockHttpServletResponse response = sendValidRequestForAttributes();
 
-        NavigationResponse actualNavigationResponse = getNavigationResponse(response);
-        assertThat(actualNavigationResponse.isHasConfigurationViewAccess()).isTrue();
+        NavigationModelResponse actualNavigationModelResponse = getNavigationResponse(response);
+        assertThat(actualNavigationModelResponse.isHasConfigurationViewAccess()).isTrue();
     }
 
     @Test
@@ -50,16 +49,16 @@ public class NavigationWebServiceTest {
 
         MockHttpServletResponse response = sendValidRequestForAttributes();
 
-        NavigationResponse actualNavigationResponse = getNavigationResponse(response);
-        assertThat(actualNavigationResponse.isHasConfigurationViewAccess()).isFalse();
+        NavigationModelResponse actualNavigationModelResponse = getNavigationResponse(response);
+        assertThat(actualNavigationModelResponse.isHasConfigurationViewAccess()).isFalse();
     }
 
-    private NavigationResponse getNavigationResponse(MockHttpServletResponse response) throws java.io.IOException {
-        return objectMapper.readValue(response.getContentAsString(), NavigationResponse.class);
+    private NavigationModelResponse getNavigationResponse(MockHttpServletResponse response) throws java.io.IOException {
+        return fromJSON(NavigationModelResponse.class, response.getContentAsString());
     }
 
     private MockHttpServletResponse sendValidRequestForAttributes() throws Exception {
-        return mockMvc.perform(get("/ws/navigation/attributes")
+        return mockMvc.perform(get("/ws/navigation/model")
                     .contentType(APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andReturn().getResponse();

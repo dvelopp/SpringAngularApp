@@ -2,7 +2,7 @@ controllers.controller('UserEditController', function ($scope, $http, $modalInst
 
     $scope.model = {};
 
-    $http.get("/ws/users/groups").success(function(data) {
+    $http.get("/ws/users/groups/links").success(function(data) {
         $scope.model = data;
     });
 
@@ -12,10 +12,7 @@ controllers.controller('UserEditController', function ($scope, $http, $modalInst
         $http({
             method: 'POST',
             url: '/ws/users',
-            data: $.param($scope.editedUser),
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+            data: $scope.editedUser,
         }).error(function (data) {
             $scope.validationErrors = data;
         }).success(function () {

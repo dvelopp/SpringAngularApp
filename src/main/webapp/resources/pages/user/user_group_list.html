@@ -1,0 +1,35 @@
+<div class="page-header">
+    <h1 translate>user.group.overview.page-header</h1>
+</div>
+<table ng-cloak class="data-table table table-bordered table-hover" cellspacing="0">
+    <thead class="ui-widget-header">
+    <th translate>user.group.list.table.headers.actions</th>
+    <th translate>user.group.list.table.headers.name</th>
+    <th translate>user.group.list.table.headers.authorities</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="userGroup in model.userGroups">
+        <td>
+            <button class="btn btn-default" ng-show="model.hasUserGroupEditAccess && !userGroup.superUserGroup"
+                    ng-click="edit(userGroup)">
+                <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <button class="btn btn-default" ng-show="model.hasUserGroupDeleteAccess && !userGroup.superUserGroup"
+                    ng-click="delete(userGroup)">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </td>
+        <td>{{userGroup.name}}</td>
+        <td>
+            <ul ng-show="!userGroup.superUserGroup" class="list-group">
+                <li ng-repeat="authority in userGroup.authorities" class="list-group-item">{{authority.name}}</li>
+            </ul>
+            <div ng-show="userGroup.superUserGroup" role="alert" class="alert alert-info">
+                <span class="glyphicon glyphicon-info-sign"></span> <span translate>user.group.list.super-user-group-authorities</span>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button ng-click="create()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>user.group.list.new-group</span>
+</button>

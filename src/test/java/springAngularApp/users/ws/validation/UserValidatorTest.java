@@ -1,4 +1,4 @@
-package springAngularApp.users.ws;
+package springAngularApp.users.ws.validation;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -10,11 +10,9 @@ import org.springframework.validation.Errors;
 import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.domain.repositories.UserRepository;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static springAngularApp.users.domain.entities.User.OLD_PASSWORD_MASK;
-import static springAngularApp.users.ws.UserValidationConstants.*;
+import static springAngularApp.users.ws.validation.UserValidationConstants.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserValidatorTest {

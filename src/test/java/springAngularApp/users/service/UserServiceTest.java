@@ -9,6 +9,7 @@ import springAngularApp.users.domain.entities.User;
 import springAngularApp.users.domain.entities.UserFixture;
 import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.domain.repositories.UserRepository;
+import springAngularApp.users.service.mapper.UserCommandMapper;
 
 import java.util.Arrays;
 import java.util.List;

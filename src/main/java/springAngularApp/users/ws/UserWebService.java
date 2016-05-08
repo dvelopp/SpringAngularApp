@@ -2,14 +2,16 @@ package springAngularApp.users.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.system.service.AuthProvider;
+import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.service.UserGroupService;
 import springAngularApp.users.service.UserService;
-import springAngularApp.users.ws.schema.UserListResponse;
+import springAngularApp.users.ws.schema.UserConfigurationModelResponse;
+import springAngularApp.users.ws.validation.UserValidator;
+
+import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -25,21 +27,9 @@ public class UserWebService {
     @Autowired private AuthProvider authProvider;
     @Autowired private UserService userService;
 
-    static final String COMMAND_NAME = "userCommand";
-
-    @InitBinder(COMMAND_NAME)
+    @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(userValidator);
-    }
-
-    @RequestMapping(method = GET)
-    public UserListResponse list() {
-        UserListResponse response = new UserListResponse();
-        response.setHasUserDeleteAccess(authProvider.hasRole(ROLE_USER_DELETE));
-        response.setHasUserEditAccess(authProvider.hasRole(ROLE_USER_EDIT));
-        response.setUserGroups(userGroupService.getUserGroups());
-        response.setUsers(userService.getUsers());
-        return response;
     }
 
     @RequestMapping(value = "/{userId}", method = DELETE)
@@ -49,9 +39,18 @@ public class UserWebService {
     }
 
     @RequestMapping(method = POST)
-    public ResponseEntity save(@Validated @ModelAttribute(COMMAND_NAME) UserCommand userCommand) {
+    public ResponseEntity save(@Valid @RequestBody UserCommand userCommand) {
         userService.save(userCommand);
         return new ResponseEntity<String>(OK);
     }
 
+    @RequestMapping(method = GET, value = "/model")
+    public UserConfigurationModelResponse getModel() {
+        UserConfigurationModelResponse response = new UserConfigurationModelResponse();
+        response.setHasUserDeleteAccess(authProvider.hasRole(ROLE_USER_DELETE));
+        response.setHasUserEditAccess(authProvider.hasRole(ROLE_USER_EDIT));
+        response.setUserGroups(userGroupService.getUserGroupLinks());
+        response.setUsers(userService.getUsers());
+        return response;
+    }
 }

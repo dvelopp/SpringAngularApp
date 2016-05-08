@@ -1,5 +1,7 @@
 package springAngularApp.users.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -102,6 +104,7 @@ public class UserCommand {
         return Objects.hash(id, userName, firstName, lastName, userGroupId, userGroupName, password, systemUser);
     }
 
+    @JsonIgnore
     public boolean isNew (){
         return isBlank(id);
     }

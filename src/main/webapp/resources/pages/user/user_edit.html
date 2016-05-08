@@ -31,7 +31,7 @@
         <div class="form-group">
             <label for="userGroupInput" translate>user.pages.edit.fields.userGroup</label>
             <select ng-model="editedUser.userGroupId" id="userGroupInput" class="form-control">
-                <option ng-repeat="userGroup in model.userGroups" value="{{userGroup.id}}">{{userGroup.name}}</option>
+                <option ng-repeat="userGroup in model.links" value="{{userGroup.id}}">{{userGroup.name}}</option>
             </select>
             <div field-validation-error-place-holder error="validationErrors.fieldErrors.userGroupId"></div>
         </div>

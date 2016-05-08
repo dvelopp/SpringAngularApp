@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        <h3 class="modal-title">
+            <div class="animate-switch" ng-if="!editedUserGroup.id" translate>user.group.edit.headers.new</div>
+            <div class="animate-switch" ng-if="editedUserGroup.id" translate>user.group.edit.headers.edit</div>
+        </h3>
+    </h3>
+</div>
+<form id="userGroupEditForm" name="userGroupEditForm">
+    <input type="hidden" name="id" ng-model="editedUser.id">
+    <div class="modal-body" ng-show="editedUserGroup">
+        <div class="form-group">
+            <label for="userNameInput" translate>user.group.edit.name-field</label>
+            <input type="text" class="form-control" id="userNameInput" ng-model="editedUserGroup.name">
+            <div field-validation-error-place-holder error="validationErrors.fieldErrors.name"></div>
+        </div>
+        <div class="form-group">
+            <label for="userNameInput" translate>user.group.edit.authorities-field</label>
+            <div ng-dropdown-multiselect="" extra-settings="multiSelectSettings"  options="allAuthorities" selected-model="selectedAuthorities"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="saveGroup()" translate>system.buttons.ok</button>
+        <button class="btn btn-warning" ng-click="cancel()" translate>system.buttons.cancel</button>
+    </div>
+</form>

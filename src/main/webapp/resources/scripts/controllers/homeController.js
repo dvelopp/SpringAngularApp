@@ -7,7 +7,7 @@ controllers.controller(
 
     $scope.model = {};
 
-    $http.get("/ws/home/attributes").success(function(data) {
+    $http.get("/ws/home/model").success(function(data) {
         $scope.model = data;
     })
 

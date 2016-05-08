@@ -2,7 +2,7 @@ controllers.controller("ConfigurationController", ['$rootScope', '$scope', '$htt
 
     $scope.model = {};
 
-    $http.get("/ws/configuration/attributes").success(function(data) {
+    $http.get("/ws/configuration/model").success(function(data) {
         $scope.model = data;
     })
 

@@ -14,9 +14,9 @@ controllers.controller('UserEditController', function ($scope, $http, $modalInst
             url: '/ws/users',
             data: $scope.editedUser,
         }).error(function (data) {
-            $scope.validationErrors = data;
+            $scope.errors = data;
         }).success(function () {
-            $scope.validationErrors = {};
+            $scope.errors = {};
             $modalInstance.dismiss('cancel');
             onSuccess();
         })

@@ -10,30 +10,30 @@
         <div class="form-group" ng-hide="editedUser.id">
             <label for="userNameInput" translate>user.pages.edit.fields.userName</label>
             <input type="text" class="form-control" id="userNameInput" ng-model="editedUser.userName">
-            <div field-validation-error-place-holder error="validationErrors.fieldErrors.userName"></div>
+            <div field-validation-error-place-holder error="errors.fieldErrors.userName"></div>
         </div>
         <div class="form-group">
             <label for="userNameInput" translate>user.pages.edit.fields.firstName</label>
             <input type="text" class="form-control" id="firstNameInput" ng-model="editedUser.firstName">
-            <div field-validation-error-place-holder error="validationErrors.fieldErrors.firstName"></div>
+            <div field-validation-error-place-holder error="errors.fieldErrors.firstName"></div>
         </div>
         <div class="form-group">
             <label for="lastNameInput" translate>user.pages.edit.fields.lastName</label>
             <input type="text" class="form-control" id="lastNameInput" ng-model="editedUser.lastName">
 
-            <div field-validation-error-place-holder error="validationErrors.fieldErrors.lastName"></div>
+            <div field-validation-error-place-holder error="errors.fieldErrors.lastName"></div>
         </div>
         <div class="form-group">
             <label for="passwordInput" translate>user.pages.edit.fields.password</label>
             <input type="password"  class="form-control" id="passwordInput" ng-model="editedUser.password">
-            <div field-validation-error-place-holder error="validationErrors.fieldErrors.password"></div>
+            <div field-validation-error-place-holder error="errors.fieldErrors.password"></div>
         </div>
         <div class="form-group">
             <label for="userGroupInput" translate>user.pages.edit.fields.userGroup</label>
             <select ng-model="editedUser.userGroupId" id="userGroupInput" class="form-control">
                 <option ng-repeat="userGroup in model.links" value="{{userGroup.id}}">{{userGroup.name}}</option>
             </select>
-            <div field-validation-error-place-holder error="validationErrors.fieldErrors.userGroupId"></div>
+            <div field-validation-error-place-holder error="errors.fieldErrors.userGroupId"></div>
         </div>
     </div>
     <div class="modal-footer">

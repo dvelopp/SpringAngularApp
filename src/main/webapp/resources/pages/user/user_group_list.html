@@ -11,11 +11,15 @@
     <tr ng-repeat="userGroup in model.userGroups">
         <td>
             <button class="btn btn-default" ng-show="model.hasUserGroupEditAccess && !userGroup.superUserGroup"
-                    ng-click="edit(userGroup)">
+                    ng-click="edit(userGroup)" tooltip-placement="left" tooltip="{{'system.action.edit'|translate}}">
                 <span class="glyphicon glyphicon-edit"></span>
             </button>
+            <button class="btn btn-default" ng-show="model.hasUserGroupEditAccess && !userGroup.superUserGroup"
+                    ng-click="copy(userGroup)" tooltip-placement="bottom" tooltip="{{'system.action.copy'|translate}}">
+                <span class="glyphicon glyphicon-copy"></span>
+            </button>
             <button class="btn btn-default" ng-show="model.hasUserGroupDeleteAccess && !userGroup.superUserGroup"
-                    ng-click="delete(userGroup)">
+                    ng-click="delete(userGroup)" tooltip-placement="right" tooltip="{{'system.action.delete'|translate}}">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
         </td>

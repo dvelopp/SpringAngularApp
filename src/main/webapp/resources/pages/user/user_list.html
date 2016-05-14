@@ -13,11 +13,16 @@
     <tbody>
     <tr ng-repeat="user in model.users">
         <td>
-            <button class="btn btn-default" ng-show="model.hasUserEditAccess" ng-click="edit(user)">
+            <button class="btn btn-default" ng-show="model.hasUserEditAccess" ng-click="edit(user)"
+                    tooltip-placement="left" tooltip="{{'system.action.edit'|translate}}" >
                 <span class="glyphicon glyphicon-edit"></span>
             </button>
+            <button class="btn btn-default" ng-show="model.hasUserEditAccess" ng-click="copy(user)"
+                    tooltip-placement="bottom" tooltip="{{'system.action.copy'|translate}}">
+                <span class="glyphicon glyphicon-copy"></span>
+            </button>
             <button class="btn btn-default" ng-show="model.hasUserDeleteAccess && !user.systemUser"
-                    ng-click="deleteUser(user)">
+                    ng-click="deleteDialog(user)" tooltip-placement="right" tooltip="{{'system.action.delete'|translate}}">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
         </td>
@@ -25,7 +30,10 @@
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.userGroupName}}</td>
-        <td>{{user.systemUser}}</td>
+        <td>
+            <div ng-if="user.systemUser == true" class="label label-success" translate>system.presentation.boolean.true</div>
+            <div ng-if="user.systemUser == false"  class="label label-danger" translate>system.presentation.boolean.false</div>
+        </td>
     </tr>
     </tbody>
 </table>

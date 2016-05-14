@@ -1,23 +1,17 @@
-controllers.controller("UserOverviewController", function ($rootScope, $scope, $http, $modal) {
+controllers.controller("UserOverviewController", function ($rootScope, $scope, $http, $modal, userService) {
 
     $scope.model = {};
-    $scope.validationErrors = {};
-    $scope.editedUser;
 
     $scope.edit = function (user) {
-        $scope.editedUserLink = user;
-        $scope.validationErrors = {};
-        $scope.editedUser = angular.copy(user);
-        if ($scope.editedUser.password) {
-            $scope.editedUser.password = "******";
-        }
-        $scope.editDialog();
+        $scope.editDialog(userService.getUserForEdit(user));;
+    };
+
+    $scope.copy = function (user) {
+        $scope.editDialog(userService.getUserForCopy(user));
     };
 
     $scope.create = function () {
-        $scope.validationErrors = {};
-        $scope.editedUser = {};
-        $scope.editDialog();
+        $scope.editDialog({});
     };
 
     $scope.loadModel = function () {
@@ -26,13 +20,13 @@ controllers.controller("UserOverviewController", function ($rootScope, $scope, $
         })
     };
 
-    $scope.editDialog = function () {
+    $scope.editDialog = function (user) {
         $modal.open({
             templateUrl: 'user/user_edit.html',
             controller: 'UserEditController',
             resolve: {
                 user: function () {
-                    return $scope.editedUser;
+                    return user;
                 },
                 onSuccess: function () {
                     return $scope.loadModel;
@@ -41,12 +35,12 @@ controllers.controller("UserOverviewController", function ($rootScope, $scope, $
         });
     };
 
-    $scope.deleteUser = function (user) {
+    $scope.deleteDialog = function (user) {
         $modal.open({
             templateUrl: 'user/user_delete.html',
             controller: 'UserDeleteController',
             resolve: {
-                user:  function () {
+                user: function () {
                     return user;
                 },
                 onSuccess: function () {

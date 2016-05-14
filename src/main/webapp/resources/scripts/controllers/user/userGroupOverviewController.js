@@ -1,4 +1,4 @@
-controllers.controller("UserGroupOverviewController", function ($rootScope, $scope, $http, $modal) {
+controllers.controller("UserGroupOverviewController", function ($rootScope, $scope, $http, $modal, userGroupService) {
 
     $scope.model = {};
 
@@ -9,26 +9,24 @@ controllers.controller("UserGroupOverviewController", function ($rootScope, $sco
     };
 
     $scope.edit = function (group) {
-        $scope.editedUserGroupLink = group;
-        $scope.validationErrors = {};
-        $scope.editedUserGroup = angular.copy(group);
-        editDialog();
+        editDialog(userGroupService.getUserGroupForEdit(group));
+    };
+
+    $scope.copy = function (group) {
+        editDialog(userGroupService.getUserGroupForCopy(group));
     };
 
     $scope.create = function () {
-        $scope.validationErrors = {};
-        $scope.editedUserGroup = {};
-        editDialog();
+        editDialog({});
     };
 
-
-    var editDialog = function () {
+    var editDialog = function (userGroup) {
         $modal.open({
             templateUrl: 'user/user_group_edit.html',
             controller: 'UserGroupEditController',
             resolve: {
                 group: function () {
-                    return $scope.editedUserGroup;
+                    return userGroup;
                 },
                 onSuccess: function () {
                     return $scope.loadGroups;

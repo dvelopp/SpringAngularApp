@@ -14,11 +14,10 @@ controllers.controller('UserGroupEditController', function ($scope, $http, $moda
             method: 'POST',
             url: '/ws/users/groups',
             data: $scope.editedUserGroup,
-
         }).error(function (data) {
-            $scope.validationErrors = data;
+            $scope.errors = data;
         }).success(function () {
-            $scope.validationErrors = {};
+            $scope.errors = {};
             $modalInstance.dismiss('cancel');
             onSuccess();
         })

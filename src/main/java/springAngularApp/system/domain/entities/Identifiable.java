@@ -16,7 +16,7 @@ public abstract class Identifiable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "CHAR(32)", nullable = false)
+    @Column(columnDefinition = "CHAR(36)", nullable = false)
     private String id;
 
     public String getId() {

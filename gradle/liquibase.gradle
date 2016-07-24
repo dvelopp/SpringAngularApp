@@ -1,0 +1,31 @@
+apply plugin: 'org.liquibase.gradle'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath('org.liquibase:liquibase-gradle-plugin:1.2.1')
+    }
+}
+
+liquibase {
+    activities {
+        main {
+            Properties props = this.readApplicationProperties();
+            changeLogFile 'changelogs/rootMainChangeLog.xml'
+            url props."spring.datasource.url"
+            username props."spring.datasource.username"
+            password props."spring.datasource.password"
+        }
+    }
+}
+
+def readApplicationProperties() {
+    def props = new Properties()
+    new File("src/main/resources/application.properties").withInputStream {
+        stream -> props.load(stream)
+    }
+    props
+}

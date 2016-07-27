@@ -54,3 +54,10 @@ The application has the following traits:
 
 ####Internalization
 ![enter image description here](https://lh3.googleusercontent.com/8Vrbod_Kpr6JJom6oaakVf71dUsyPstA7krxanGwpVpkyl5GWG6-PJs6l273iw4y15-RjjEbwCG0IheqZ-8eDmX-hcAC20BIXPBHvM4DfIwkT2dNdcBL9muu4Pg-jttATmxIK-kGzZOQU6eEuMG1rACdFvY72dipW4PX8wI-RNKpHAUj38BhDyROhWzIbOLQg2flCM56qMrk6kaAKlNeim0Ysmidat8rrc6NbtfkDRC3s3qDxluNzrADv2f7v9WS6T1JOPUVIhl1XxySYalGKcL-nmfmc7Kbn2EVflf2-kXZsgQuesm-d-3CJlyZz0OTY5pwOaYcU8r7TQcrskPJpnGSppc-hx0umkw1FnScoGuDMv3Hqkh1ao3FQb7BasvkmSlrCnmdizKwPEOljoOkpvijZnMN6thPWFOQd-g_L-TIp7k2-MskTnoNAIDOVryG4yworp1iQR0QnACvDtC7iBtnnHAdDFjANbYwAXASsP07UxiijS25t-YaAB2fFmlYgPx7Um8Dp7rdrzuL3cM7Uwg8QNbURMKOM4myfsD_NKq-eIvdRP5-1MUfBN1zd-RRmvvT=w1425-h899-no)
+
+### Quick setup(database) :
+
+In order to setup the database you need to specify its configuration in the following config:
+application.properties.
+Having configured that, to add the default data, you need to call a REST method that is provided by springAngularApp.system.ws.InitDBController. 
+Just call http://localhost:8080/initDB and expect the OK status. 

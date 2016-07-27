@@ -54,8 +54,9 @@ public class UserGroup extends Identifiable {
         return superUserGroup;
     }
 
-    public void setSuperUserGroup(boolean superUserGroup) {
+    public UserGroup setSuperUserGroup(boolean superUserGroup) {
         this.superUserGroup = superUserGroup;
+        return this;
     }
 
     public UserGroup(String name, List<UserAuthority> authorities) {

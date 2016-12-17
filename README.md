@@ -32,7 +32,8 @@ The application has the following traits:
  - **Java Script** (**AngularJS, Bootstrap**, ajax, *plugins*);
  -  **Bower**
 
-### **NEW Added CRUD for user groups 
+### **NEW Added CRUD for user groups. 
+### **NEW branch with gradle tests. 
 
  ###**Page examples** 
 

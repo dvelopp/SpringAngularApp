@@ -42,7 +42,7 @@ public class UserGroupCommandMapper {
         List<String> authoritiesIds = command.getAuthorities().stream()
                 .map(IdNameCommand::getId)
                 .collect(toList());
-        userGroup.setAuthorities(userAuthorityRepository.findAll(authoritiesIds));
+        userGroup.setAuthorities(null);
         userGroup.setName(command.getName());
         return userGroup;
     }

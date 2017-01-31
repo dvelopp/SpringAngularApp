@@ -2,13 +2,11 @@ package springAngularApp.system.domain;
 
 import org.hibernate.Session;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import springAngularApp.Application;
 import springAngularApp.system.domain.entities.Identifiable;
 
 import javax.persistence.EntityManager;
@@ -18,7 +16,6 @@ import java.util.List;
 @WebAppConfiguration
 @Transactional(transactionManager = "txManager")
 @TestPropertySource(locations = "classpath:test.properties")
-@SpringApplicationConfiguration(classes = {Application.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Rollback(value = true)
 public abstract class HibernateIntegrationTest<Entity extends Identifiable> {

@@ -32,7 +32,8 @@ The application has the following traits:
  - **Java Script** (**AngularJS, Bootstrap**, ajax, *plugins*);
  -  **Bower**
 
-### **NEW Added CRUD for user groups 
+### **NEW Added CRUD for user groups. 
+### **NEW branch with gradle tests. 
 
  ###**Page examples** 
 
@@ -61,3 +62,5 @@ In order to setup the database you need to specify its configuration in the foll
 application.properties.
 Having configured that, to add the default data, you need to call a REST method that is provided by springAngularApp.system.ws.InitDBController. 
 Just call http://localhost:8080/initDB and expect the OK status. 
+
+UPDATED: Screenshots are out of date. 

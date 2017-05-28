@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import springAngularApp.configuration.ws.schema.ConfigurationModelResponse;
 import springAngularApp.system.service.AuthProvider;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -74,7 +76,7 @@ public class ConfigurationWebServiceTest {
         assertThat(actualConfigurationModelResponse.isHasUserGroupViewAccess()).isFalse();
     }
 
-    private ConfigurationModelResponse getConfigurationResponse(MockHttpServletResponse response) throws java.io.IOException {
+    private ConfigurationModelResponse getConfigurationResponse(MockHttpServletResponse response) throws IOException {
         return fromJSON(ConfigurationModelResponse.class, response.getContentAsString());
     }
 
@@ -84,6 +86,5 @@ public class ConfigurationWebServiceTest {
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
     }
-
 
 }

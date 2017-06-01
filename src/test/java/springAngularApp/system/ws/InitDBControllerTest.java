@@ -31,6 +31,7 @@ public class InitDBControllerTest {
     @Mock private PasswordEncoder passwordEncoder;
     @Mock(answer = RETURNS_DEEP_STUBS) private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unused")
     private MockMvc mockMvc;
 
     @Before

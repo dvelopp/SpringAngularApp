@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static springAngularApp.users.domain.entities.UserAuthorityFixture.createDefaultUserAuthority;
@@ -29,7 +30,7 @@ public class CustomUserDetailsServiceTest {
     @Test
     public void loadUserByUsername_UserExists_UserDetailsHaveBeenCreatedForSelectedUser() {
         UserAuthority userAuthority = createDefaultUserAuthority();
-        UserGroup userGroup = UserGroupFixture.builder().setAuthorities(asList(userAuthority)).build();
+        UserGroup userGroup = UserGroupFixture.builder().setAuthorities(singletonList(userAuthority)).build();
         User user = UserFixture.builder().setGroup(userGroup).build();
         when(userRepository.findByName(user.getName())).thenReturn(user);
 

@@ -11,10 +11,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -43,7 +43,7 @@ public class AuthProviderTest {
     @Test
     public void hasRole_RoleExists_UserHasSelectedRole(){
         GrantedAuthority authority = new SimpleGrantedAuthority(TEST_ROLE_NAME);
-        Collection<? extends GrantedAuthority> grantedAuthorities = Arrays.asList(authority);
+        Collection<? extends GrantedAuthority> grantedAuthorities = singletonList(authority);
         when(authentication.getAuthorities()).thenAnswer(invocation -> grantedAuthorities);
 
         boolean hasRole = testee.hasRole(TEST_ROLE_NAME);

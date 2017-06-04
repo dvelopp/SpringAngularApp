@@ -8,7 +8,7 @@
  - Configuration page
  - User management module
 
-Application allows you to navigate accross the pages that you have access to.  *User management* module provides functionallity to create and modify existing users. These users are used to login to the system. 
+Application allows you to navigate across the pages that you have access to.  *User management* module provides functionality to create and modify existing users. These users are used to login to the system. 
 
 The application has the following traits:
 

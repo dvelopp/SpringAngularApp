@@ -8,12 +8,12 @@ import java.io.StringWriter;
 
 public class JsonUtils {
 
-    public static String toJSON(Object o) {
+    public static String toJSON(Object objectToConvert) {
         ObjectMapper objectMapper = new ObjectMapper();
         StringWriter sWriter = new StringWriter();
         try {
             JsonGenerator jsonGenerator = objectMapper.getJsonFactory().createJsonGenerator(sWriter);
-            objectMapper.writeValue(jsonGenerator, o);
+            objectMapper.writeValue(jsonGenerator, objectToConvert);
             return sWriter.toString();
         } catch (IOException e) {
             throw new IllegalStateException(e);

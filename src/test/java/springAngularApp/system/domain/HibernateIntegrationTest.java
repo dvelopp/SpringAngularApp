@@ -20,7 +20,7 @@ import java.util.List;
 @TestPropertySource(locations = "classpath:test.properties")
 @SpringApplicationConfiguration(classes = {Application.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-@Rollback(value = true)
+@Rollback
 public abstract class HibernateIntegrationTest<Entity extends Identifiable> {
 
     @PersistenceContext

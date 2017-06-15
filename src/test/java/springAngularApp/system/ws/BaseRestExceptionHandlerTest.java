@@ -13,9 +13,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import springAngularApp.system.ws.schema.ValidationErrorsResponse;
 
-import java.util.Collections;
-
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -35,8 +35,8 @@ public class BaseRestExceptionHandlerTest {
 
     @Before
     public void setup() {
-        when(bindingResult.getFieldErrors()).thenReturn(Collections.<FieldError>emptyList());
-        when(bindingResult.getGlobalErrors()).thenReturn(Collections.<ObjectError>emptyList());
+        when(bindingResult.getFieldErrors()).thenReturn(emptyList());
+        when(bindingResult.getGlobalErrors()).thenReturn(emptyList());
         methodArgumentNotValidException = new MethodArgumentNotValidException(methodParameter, bindingResult);
     }
 
@@ -87,7 +87,7 @@ public class BaseRestExceptionHandlerTest {
 
     private void addGlobalError() {
         ObjectError objectError = new ObjectError(TEST_OBJECT_NAME, TEST_FIELD_ERROR_MESSAGE);
-        when(bindingResult.getGlobalErrors()).thenReturn(asList(objectError));
+        when(bindingResult.getGlobalErrors()).thenReturn(singletonList(objectError));
     }
 
     @SuppressWarnings("all")

@@ -1,0 +1,12 @@
+version: '2'
+services:
+  postgres:
+    image: postgres
+    volumes:
+    - /data
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: TestDataBase

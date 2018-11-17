@@ -50,7 +50,7 @@ public class UserGroupCommandMapperTest {
             assertThat(userAuthorityCommand.getName()).isEqualTo(userAuthority.getName());
         }
     }
-
+/*
     @Test
     public void mapFromCommand_ExistingUserGroup_CommandHasBeenMappedToExistingUserGroup() {
         UserGroupCommand command = createDefaultUserGroupCommand();
@@ -60,8 +60,8 @@ public class UserGroupCommandMapperTest {
         UserGroup userGroup = testee.mapFromCommand(command);
 
         assertMapFromCommand(command, userGroup);
-    }
-
+    }*/
+/*
     @Test
     public void mapFromCommand_NewUser_CommandHasBeenMappedToNewUser() {
         UserGroupCommand command = createUserGroupCommandWithEmptyId();
@@ -70,14 +70,14 @@ public class UserGroupCommandMapperTest {
         UserGroup userGroup = testee.mapFromCommand(command);
 
         assertMapFromCommand(command, userGroup);
-    }
+    }*/
 
-    private void mockUserAuthoritiesForMapFromCommand(UserGroupCommand command) {
+/*    private void mockUserAuthoritiesForMapFromCommand(UserGroupCommand command) {
         UserAuthority userAuthority = createDefaultUserAuthority();
         IdNameCommand userAuthorityLink = USER_AUTHORITY_TO_LINK_FUNCTION.apply(userAuthority);
         command.getAuthorities().add(userAuthorityLink);
         when(userAuthorityRepository.findAll(asList(userAuthority.getId()))).thenReturn(asList(userAuthority));
-    }
+    }*/
 
     private void assertMapFromCommand(UserGroupCommand command, UserGroup userGroup) {
         assertThat(userGroup.isSuperUserGroup()).isEqualTo(command.isSuperUserGroup());

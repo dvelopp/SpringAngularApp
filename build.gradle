@@ -31,8 +31,8 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     runtime 'org.postgresql:postgresql:9.4-1206-jdbc42'
     compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
-    compile 'org.hibernate:hibernate-core:5.0.6.Final'
-    compile 'org.hibernate:hibernate-entitymanager:5.0.6.Final'
+    compile 'org.hibernate:hibernate-core'
+    compile 'org.hibernate:hibernate-entitymanager'
     compile 'org.projectlombok:lombok:1.18.4'
     compile 'javax.servlet:jstl:1.2'
     compile 'org.apache.commons:commons-lang3:3.4'
@@ -53,7 +53,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.17.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE")
         classpath("org.postgresql:postgresql:9.4-1206-jdbc42")
         classpath('org.liquibase:liquibase-gradle-plugin:1.2.1')
     }

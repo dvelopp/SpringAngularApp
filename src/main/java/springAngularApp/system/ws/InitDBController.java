@@ -75,7 +75,7 @@ public class InitDBController {
         admin.setFirstName("Bob");
         admin.setLastName("Smith");
 
-        userAuthorityRepository.save(
+        userAuthorityRepository.saveAll(
                 newArrayList(
                         roleDefault,
                         roleUserEdit,
@@ -86,7 +86,7 @@ public class InitDBController {
                         roleUserGroupView,
                         roleUserGroupDelete
                 ));
-        userGroupRepository.save(newArrayList(adminGroup, defaultUserGroup));
+        userGroupRepository.saveAll(newArrayList(adminGroup, defaultUserGroup));
         userRepository.save(admin);
         generateAdditionalUsers(adminGroup, password);
         return new ResponseEntity(OK);

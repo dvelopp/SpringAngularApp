@@ -10,6 +10,7 @@ import springAngularApp.users.domain.repositories.UserRepository;
 import springAngularApp.users.service.mapper.UserCommandMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 import static springAngularApp.users.domain.entities.UserAuthorities.*;
@@ -38,11 +39,11 @@ public class UserService {
     @Secured(ROLE_USER_DELETE)
     @Transactional
     public void delete(String userId) {
-        User user = userRepository.findOne(userId);
-        if (user.isSystemUser()) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.get().isSystemUser()) {
             throw new IllegalArgumentException("System user can't be deleted");
         }
-        userRepository.delete(userId);
+        userRepository.deleteById(userId);
     }
 
 }

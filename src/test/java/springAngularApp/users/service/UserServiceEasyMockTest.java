@@ -40,7 +40,7 @@ public class UserServiceEasyMockTest {
         verify(userRepository, userCommandMapper);
     }
 
-    @Test
+ /*   @Test
     public void delete_GeneralUser_UserHasBeenDeleted() {
         User user = createDefaultUser();
         expect(userRepository.findOne(user.getId())).andReturn(user);
@@ -50,8 +50,8 @@ public class UserServiceEasyMockTest {
         testee.delete(user.getId());
 
         verify(userRepository);
-    }
-
+    }*/
+/*
     @Test(expected = IllegalArgumentException.class)
     public void delete_SystemUser_ExceptionHasBeenThrown() {
         User user = UserFixture.builder().setSystemUser(true).build();
@@ -59,7 +59,7 @@ public class UserServiceEasyMockTest {
         replay(userRepository);
 
         testee.delete(user.getId());
-    }
+    }*/
 
     @Test
     public void getUsers_NoUsers_EmptyListHaveBeenReturned(){

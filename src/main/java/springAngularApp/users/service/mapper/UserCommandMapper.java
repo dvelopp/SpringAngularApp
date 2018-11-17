@@ -9,6 +9,8 @@ import springAngularApp.users.domain.model.UserCommand;
 import springAngularApp.users.domain.repositories.UserGroupRepository;
 import springAngularApp.users.domain.repositories.UserRepository;
 
+import java.util.Optional;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static springAngularApp.users.domain.entities.User.OLD_PASSWORD_MASK;
 
@@ -34,12 +36,12 @@ public class UserCommandMapper {
 
     public User mapFromCommand(UserCommand userCommand) {
         User user;
-        UserGroup userGroup = userGroupRepository.findOne(userCommand.getUserGroupId());
+        Optional<UserGroup> userGroup = userGroupRepository.findById(userCommand.getUserGroupId());
         if (isNotBlank(userCommand.getId())) {
-            user = userRepository.findOne(userCommand.getId());
-            user.setGroup(userGroup);
+            user = userRepository.findById(userCommand.getId()).get();
+            user.setGroup(userGroup.get());
         } else {
-            user = new User(userCommand.getUserName(), userCommand.getPassword(), userGroup);
+            user = new User(userCommand.getUserName(), userCommand.getPassword(), userGroup.get());
         }
         user.setFirstName(userCommand.getFirstName());
         user.setLastName(userCommand.getLastName());

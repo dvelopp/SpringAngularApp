@@ -11,11 +11,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 @Configuration
 public class SpringJpaConfig {
 
-    @Autowired
-    private LocalContainerEntityManagerFactoryBean entityManagerFactory;
+    @Bean
+    public LocalContainerEntityManagerFactoryBean LocalContainerEntityManagerFactoryBean(){
+        return new LocalContainerEntityManagerFactoryBean();
+    }
 
     @Bean
-    public JpaTransactionManager txManager() {
+    public JpaTransactionManager txManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
         return transactionManager;

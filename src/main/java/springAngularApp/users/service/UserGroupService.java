@@ -11,6 +11,7 @@ import springAngularApp.users.domain.repositories.UserGroupRepository;
 import springAngularApp.users.service.mapper.UserGroupCommandMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -54,11 +55,11 @@ public class UserGroupService {
     @Secured(ROLE_USER_GROUP_DELETE)
     @Transactional
     public void delete(String userGroupId) {
-        UserGroup userGroup = userGroupRepository.findOne(userGroupId);
-        if (userGroup.isSuperUserGroup()) {
+        Optional<UserGroup> userGroup = userGroupRepository.findById(userGroupId);
+        if (userGroup.get().isSuperUserGroup()) {
             throw new IllegalArgumentException("Super user group can't be deleted");
         }
-        userGroupRepository.delete(userGroupId);
+        userGroupRepository.deleteById(userGroupId);
     }
 
 }

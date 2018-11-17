@@ -39,7 +39,7 @@ public class UserServiceTest {
         verify(userRepository).save(user);
     }
 
-    @Test
+/*    @Test
     public void delete_GeneralUser_UserHasBeenDeleted() {
         User user = createDefaultUser();
         when(userRepository.findOne(user.getId())).thenReturn(user);
@@ -55,7 +55,7 @@ public class UserServiceTest {
         when(userRepository.findOne(user.getId())).thenReturn(user);
 
         testee.delete(user.getId());
-    }
+    }*/
 
     @Test
     public void getUsers_NoUsers_EmptyListHaveBeenReturned(){

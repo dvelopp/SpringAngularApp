@@ -27,12 +27,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
-    }
-
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -45,11 +39,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;
-    }
-
-    @Bean
-    public SerializableResourceBundleMessageSource serializableResourceBundleMessageSource(){
-        return new SerializableResourceBundleMessageSource();
     }
 
     @Override

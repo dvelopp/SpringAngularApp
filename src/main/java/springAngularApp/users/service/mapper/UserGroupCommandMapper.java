@@ -35,14 +35,14 @@ public class UserGroupCommandMapper {
     public UserGroup mapFromCommand(UserGroupCommand command) {
         UserGroup userGroup;
         if (isNotBlank(command.getId())) {
-            userGroup = userGroupRepository.findOne(command.getId());
+            userGroup = userGroupRepository.findById(command.getId()).get();
         } else {
             userGroup = new UserGroup(command.getName());
         }
         List<String> authoritiesIds = command.getAuthorities().stream()
                 .map(IdNameCommand::getId)
                 .collect(toList());
-        userGroup.setAuthorities(userAuthorityRepository.findAll(authoritiesIds));
+        userGroup.setAuthorities(userAuthorityRepository.findAllById(authoritiesIds));
         userGroup.setName(command.getName());
         return userGroup;
     }

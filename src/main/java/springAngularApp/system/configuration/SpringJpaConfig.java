@@ -12,11 +12,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 public class SpringJpaConfig {
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean LocalContainerEntityManagerFactoryBean(){
-        return new LocalContainerEntityManagerFactoryBean();
-    }
-
-    @Bean
     public JpaTransactionManager txManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());

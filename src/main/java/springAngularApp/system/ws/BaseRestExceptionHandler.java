@@ -17,11 +17,13 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 @ControllerAdvice(annotations = RestController.class)
 public class BaseRestExceptionHandler {
 
+    private static final String GENERAL_ERROR_MSG = "There is an error while processing the action. ";
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ExceptionResponse exception(Throwable exception) {
-        return new ExceptionResponse("There is an error while processing the action. " + exception.getMessage());
+        return new ExceptionResponse(GENERAL_ERROR_MSG + exception.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

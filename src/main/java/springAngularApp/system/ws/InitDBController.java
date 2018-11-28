@@ -30,6 +30,8 @@ import static springAngularApp.users.domain.entities.UserAuthorities.*;
 @SuppressWarnings("all")
 public class InitDBController {
 
+    public static final String ADMINISTRATOR = "Administrator";
+    public static final String DEFAULT_USER = "Default user";
     @Autowired private UserAuthorityRepository userAuthorityRepository;
     @Autowired private UserGroupRepository userGroupRepository;
     @Autowired private UserRepository userRepository;
@@ -45,9 +47,9 @@ public class InitDBController {
         sessionFactory.getCurrentSession().flush();
         sessionFactory.getCurrentSession().clear();
 
-        UserGroup adminGroup = new UserGroup("Administrator");
+        UserGroup adminGroup = new UserGroup(ADMINISTRATOR);
         adminGroup.setSuperUserGroup(true);
-        UserGroup defaultUserGroup = new UserGroup("Default user");
+        UserGroup defaultUserGroup = new UserGroup(DEFAULT_USER);
 
         UserAuthority roleDefault = new UserAuthority(ROLE_DEFAULT);
         UserAuthority roleUserEdit = new UserAuthority(ROLE_USER_EDIT);

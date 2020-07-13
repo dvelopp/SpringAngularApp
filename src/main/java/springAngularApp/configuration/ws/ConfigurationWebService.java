@@ -14,9 +14,13 @@ import static springAngularApp.users.domain.entities.UserAuthorities.ROLE_USER_V
 @RequestMapping("ws/configuration")
 public class ConfigurationWebService {
 
-    @Autowired private AuthProvider authProvider;
+    private final AuthProvider authProvider;
+    
+    public ConfigurationWebService(AuthProvider authProvider){
+        this.authProvider = authProvider;
+    }
 
-    @RequestMapping(method = GET, value = "/model")
+    @GetMapping("/model")
     public ConfigurationModelResponse model() {
         ConfigurationModelResponse response = new ConfigurationModelResponse();
         response.setHasUserViewAccess(authProvider.hasRole(ROLE_USER_VIEW));
